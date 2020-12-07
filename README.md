@@ -1,7 +1,6 @@
 # OS_Simulation
 ## How to Run
-To compile, run ```make``` .<br />
-Then, enter ```./run``` into your terminal.
+To compile and run, enter ```make run``` into your terminal.
 
 ### At the start, the program asks the user two questions:
 How much RAM memory is there on the simulated computer? The program receives the number in bytes (no kilobytes or words). I can enter any number up to 4000000000 (4 billions).
@@ -39,3 +38,8 @@ Shows the state of memory. Show the range of memory addresses used by each proce
 **Disk I/O-queues are Shortest-Seek-Time-First.**
 
 **Memory:** your program should simulate contiguous memory management with “First-fit” approach. You are not allowed to separately represent each byte of memory in your simulation.
+
+## Known Bugs
+* Seg Faults in the following known scenarios
+  * Possibly due to unchecked pointers, creating or merging PCBs throw errors
+  * Disk queue does not insert a process back onto the priority queue even when there are no cylinders left to ready
