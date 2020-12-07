@@ -34,7 +34,8 @@ Shows the state of memory. Show the range of memory addresses used by each proce
 
 ## Instructions / Requirements
 ### Topics
-**CPU scheduling:** Implement preemptive priority scheduling. The higher is the number the higher is the priotity. <br />
+**CPU scheduling:** Implement preemptive priority scheduling. The higher is the number the higher is the priotity.
+
 **Disk I/O-queues are Shortest-Seek-Time-First.**
 
 **Memory:** your program should simulate contiguous memory management with “First-fit” approach. You are not allowed to separately represent each byte of memory in your simulation.
