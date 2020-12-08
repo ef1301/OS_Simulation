@@ -1,3 +1,24 @@
+/*
+  Name: Emily Fang
+  Contains DiskQueue class for storing pairs of <PID, Cylinders> in a list
+
+  Private Member:
+  - int disk_num
+  - int head
+  - std::list<std::pair<int, Cylinders>> dqueue
+
+  Public Function:
+  - <constructor>
+  - void insert(int PID, std::list<int> input)
+  - bool noCylinders()
+  - bool isEmpty()
+  - int getPID()
+  - void readHead()
+  - void nextHead()
+  - void removeFront()
+  - void print()
+*/
+
 #include "Cylinders.cpp"
 
 class DiskQueue {

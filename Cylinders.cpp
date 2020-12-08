@@ -1,3 +1,20 @@
+/*
+  Name: Emily Fang
+  Contains Cylinders class for storing cylinders to be read
+
+  Private Members:
+  - std::list<int> cylinders
+
+  Public Functions:
+  - <constructor>
+  - <destructor>
+  - std::list<int>::iterator findCylinder(int value)
+  - void read(int head)
+  - std::list<int>::iterator end()
+  - int nextHead(int head)
+  - bool isEmpty()
+  - void print()
+ */
 #include <list>
 #include <iostream>
 #include <cstdlib>

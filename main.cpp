@@ -1,5 +1,9 @@
+/*
+  Name: Emily Fang
+  Contains main OS simulation, input retrieval & processing, error catching for commands
+ */
+
 #include "OS.cpp"
-#include <iostream>
 #include <string>
 #include <sstream>
 #include <typeinfo> // for testing

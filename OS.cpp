@@ -1,3 +1,22 @@
+/*
+  Name: Emily Fang
+  Contains DiskQueue class for storing pairs of <PID, Cylinders> in a list
+
+  Private Member:
+  - RAM RAM_MEM
+  - int number_of_hard_disks
+  - std::list<std::pair<int,int>> ready_queue
+  - std::vector<DiskQueue> disk_queue
+
+  Public Function:
+  - <constructor>
+  - void CreateProcess(int input_priority, unsigned long int size)
+  - void TerminateCurrentProcess()
+  - void newDiskRead(int disk_num, std::list<int> input)
+  - void readCylinder(int disk_num)
+  - <print functions>
+*/
+
 #include "RAM.cpp"
 #include "DiskQueue.cpp"
 #include <iterator>

@@ -1,3 +1,7 @@
+/*
+  Name: Emily Fang
+  Contains PCB struct for representing and impementing a Process Block (PID, priority, size, memory range)
+ */
 #include <utility>
 #include <iostream>
 

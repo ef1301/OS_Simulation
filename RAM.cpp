@@ -1,3 +1,22 @@
+/*
+  Name: Emily Fang
+  Contains RAM class for storing PCBs
+
+  Private Members:
+  - std::list<PCB*> memory
+  - unsigned long int size
+  - int process_count
+
+  Public Functions:
+  - <constructor>
+  - int GetCount()
+  - void print()
+  - void PrintMemory()
+  - int FindPriority(int PID)
+  - void CreateNewProcess(int priority, unsigned long int size)
+  - void TerminatePCB(int PID)
+ */
+
 #include "PCB.cpp"
 #include <list>
 
@@ -27,13 +46,13 @@ class RAM {
   void PrintMemory() {
     std::list<PCB*>::iterator it = memory.begin();
     while(it != memory.end()) {
-      //if((*it)->PID != 0) {
+      if((*it)->PID != 0) {
         std::cout << "Process Number: " << (*it)->PID << std::endl;
         std::cout << "Process Number: " << (*it)->memory_occupied.first << " - " << (*it)->memory_occupied.second << std::endl;
         it++;
-        /*} else {
+      } else {
         it++;
-        }*/
+      }
     }
   }
 
@@ -68,7 +87,7 @@ class RAM {
             process_count++;
             (*it)->reusePCB(process_count, priority, start, end);
             memory.push_back(empty_PCB_ptr);
-            print();
+            //print();
             break;
         } else {
           ++it;
@@ -90,7 +109,7 @@ class RAM {
       }
       it++;
     }
-    //MergeEmptyPCB();
+    MergeEmptyPCB();
   }
 
   private:
@@ -120,26 +139,28 @@ class RAM {
       if((*it)->PID == 0) { //empty slot
         if(next != memory.end()) {
           if((*next)->PID == 0) {
-            std::cout << "it" << std::endl;
+            /*std::cout << "it" << std::endl;
             (*it)->print();
             std::cout << "next" << std::endl;
-            (*next)->print();
+            (*next)->print();*/
             (*it)->mergeEmptyPCB((*next)->memory_occupied.first, (*it)->memory_occupied.second);
             //memory.erase(next);
             merged = true;
             break;
           } else {
             it++;
+            next++;
           }
         } else {
           break;
         }
       } else {
         it++;
+        next++;
       }
       }
     if(merged) {
-      std::cout << "MERGED\n";
+      //std::cout << "MERGED\n";
       (*it)->print();
       if(next != memory.end()) {
         Reduce(next);
