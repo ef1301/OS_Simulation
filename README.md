@@ -42,4 +42,5 @@ Shows the state of memory. Show the range of memory addresses used by each proce
 ## Known Bugs
 * Seg Faults in the following known scenarios
   * Possibly due to unchecked pointers, creating or merging PCBs throw errors
-  * Disk queue does not insert a process back onto the priority queue even when there are no cylinders left to ready
+  * Disk queue does not insert a process back onto the priority queue even when there are no cylinders left to ready if you finish the very first possible cylinder reading on the disk queue
+* There doesn't appear to be any errors the more inputs that run

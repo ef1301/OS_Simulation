@@ -32,11 +32,7 @@ class DiskQueue {
   }
 
   bool noCylinders() {
-    if(dqueue.front().second.isEmpty()) {
-      return true;
-    } else {
-      return false;
-    }
+    return dqueue.front().second.isEmpty();
   }
 
   bool isEmpty() {
@@ -48,8 +44,11 @@ class DiskQueue {
   }
 
   void readHead() {
-    dqueue.front().second.read(head); //head is removed/"read"
-    nextHead(); //update the head
+    if(dqueue.empty() == false) {
+      dqueue.front().second.read(head); //head is removed/"read"
+      nextHead(); //update the head
+    } else {
+    }
   }
 
   void nextHead() {

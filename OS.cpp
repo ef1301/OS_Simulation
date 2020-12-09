@@ -62,7 +62,7 @@ class OperatingSystem {
     RAM_MEM.CreateNewProcess(input_priority, size);
     int latest_process = RAM_MEM.GetCount();
     AddToReadyQueue(latest_process, input_priority);
-    SortQueue();
+    //    SortQueue();
   }
 
   /*
@@ -83,7 +83,7 @@ class OperatingSystem {
 
   void newDiskRead(int disk_num, std::list<int> input) {
     if(ready_queue.empty()) { // cannot do a disk read b/c no process to append to dqueue
-      std::cout << "ERROR: No processes to read current cylinder input.\n";
+      std::cout << "ERROR: No processes in priority queue to read current cylinder input.\n";
     } else { //take first from pqueue and append to dqueue
       int PID = ready_queue.front().first;
       if(PID != 0) {
@@ -97,21 +97,15 @@ class OperatingSystem {
   }
 
   void readCylinder(int disk_num) {
-    if(disk_queue[disk_num].isEmpty() == false) { //No Processes on dqueue
-      if(disk_queue[disk_num].noCylinders() == true) { //if no cylinders to read, add back to pqueue
-        int PID = disk_queue[disk_num].getPID();
-        int priority_level = RAM_MEM.FindPriority(PID);
-        if(priority_level != -1){
-          AddToReadyQueue(PID, priority_level);
-          disk_queue[disk_num].removeFront();
-        } else {
-          std::cout << "ERROR: Cannot find procss with PID " << PID << ".\n";
-        }
-      } else {
-        disk_queue[disk_num].readHead();
-      }
-    } else {
-      std::cout << "ERROR: No cylinders to read from Disk " << disk_num << ".\n";
+    disk_queue[disk_num].readHead();
+    if(disk_queue[disk_num].isEmpty() == true) {
+      std::cout << "No cylinders left to read.\n";
+    }
+    if(disk_queue[disk_num].noCylinders() == true) { //if no cylinders to read, add back to pqueue
+      int PID = disk_queue[disk_num].getPID();
+      int priority_level = RAM_MEM.FindPriority(PID);
+      AddToReadyQueue(PID, priority_level);
+      disk_queue[disk_num].removeFront();
     }
   }
 
@@ -186,6 +180,6 @@ class OperatingSystem {
       ready_queue.pop_front();
     }
     ready_queue.push_back(std::make_pair(PID, input_priority));
-    //SortQueue();
+    SortQueue();
   };
 };

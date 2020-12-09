@@ -78,7 +78,6 @@ class Cylinders {
     std::list<int>::iterator closest;
     int difference = INT_MAX;
     if (cylinders.empty()) { // no more cylinders to read
-      std::cout << "ERROR: No cylinders left to read." << std::endl;
       return -1;
     } else { // still are cylinders to read
       //find the cylinder that's closest to read
