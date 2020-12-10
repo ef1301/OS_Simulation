@@ -113,7 +113,7 @@ int main() {
       bool error_caught = false;
       if(ss >> input && is_number(input)) {
         disk_num = std::stoi(input);
-        if(disk_num > hard_disks) {
+        if(disk_num >= hard_disks) {
           std::cout << "ERROR: Disk " << input << " does not exist on the current OS.\n";
         } else {
           while(ss >> input) {
@@ -141,8 +141,9 @@ int main() {
       std::string input;
       ss >> input;
       if(is_number(input) == true) {
-        if(std::stoi(input) > hard_disks) {
-          std::cout << "ERROR: Disk " << input << " does not exist on the current OS.\n";
+        int request = std::stoi(input);
+        if(request >= hard_disks) {
+          std::cout << "ERROR: Disk " << request << "does not exist on the current OS.\n";
         } else {
           current_OS.readCylinder(std::stoi(input));
         }

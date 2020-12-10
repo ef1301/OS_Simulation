@@ -189,7 +189,7 @@ class RAM {
       }
     if(merged) {
       //std::cout << "MERGED\n";
-      (*it)->print();
+      //(*it)->print();
       if(next != memory.end()) {
         Reduce(next);
         memory.pop_front();

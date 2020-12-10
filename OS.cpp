@@ -45,8 +45,6 @@ class OperatingSystem {
     RAM_MEM(input_RAM),
     number_of_hard_disks(input_hard_disks)
   {
-    std::pair<int, int> p(0,-1);
-    ready_queue.push_back(p);
     for(int i = 0; i < input_hard_disks; i++) {
       DiskQueue disk(i);
       disk_queue.push_back(disk);
@@ -103,15 +101,24 @@ class OperatingSystem {
     Reads the current head of inputted disk number
    */
   void readCylinder(int disk_num) {
-    disk_queue[disk_num].readHead();
     if(disk_queue[disk_num].isEmpty() == true) {
       std::cout << "No cylinders left to read.\n";
     }
+    else if(disk_queue[disk_num].noCylinders() == false) { //if no cylinders to read, add back to pqueue
+      disk_queue[disk_num].readHead();
+      returnToPQueue(disk_num);
+    }
+  }
+
+  void returnToPQueue(int disk_num) {
     if(disk_queue[disk_num].noCylinders() == true) { //if no cylinders to read, add back to pqueue
       int PID = disk_queue[disk_num].getPID();
       int priority_level = RAM_MEM.FindPriority(PID);
       AddToReadyQueue(PID, priority_level);
       disk_queue[disk_num].removeFront();
+      if(disk_queue[disk_num].isEmpty() == false) {
+        disk_queue[disk_num].nextHead();
+      }
     }
   }
 
@@ -192,9 +199,6 @@ class OperatingSystem {
     Adds a process of some pid to the ready queue or it goes to the CPU if it is currently idle
   */
   void AddToReadyQueue(const int PID, const int input_priority) {
-    if(ready_queue.front().first == 0) {
-      ready_queue.pop_front();
-    }
     ready_queue.push_back(std::make_pair(PID, input_priority));
     SortQueue();
   };
