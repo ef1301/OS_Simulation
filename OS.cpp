@@ -66,7 +66,7 @@ class OperatingSystem {
   }
 
   /*
-    Terminates the current process running on the CPU
+    Terminates the current process running on the CPU aka the first process on the pqueue/ready_queue
     First/front of RAM_MEM (RAM Memory)
   */
   void TerminateCurrentProcess() {
@@ -81,6 +81,9 @@ class OperatingSystem {
     }
   }
 
+  /*
+    Takes the current process from ready_queue and adds it onto the dqueue for some disk number
+  */
   void newDiskRead(int disk_num, std::list<int> input) {
     if(ready_queue.empty()) { // cannot do a disk read b/c no process to append to dqueue
       std::cout << "ERROR: No processes in priority queue to read current cylinder input.\n";
@@ -96,6 +99,9 @@ class OperatingSystem {
     }
   }
 
+  /*
+    Reads the current head of inputted disk number
+   */
   void readCylinder(int disk_num) {
     disk_queue[disk_num].readHead();
     if(disk_queue[disk_num].isEmpty() == true) {
@@ -109,12 +115,16 @@ class OperatingSystem {
     }
   }
 
-  //PRINT FUNCTIONS
-  void print() {
+  //PRINT FUNCTIONS ---------------------------------------------------------------------------------
+  //For RAM debugging
+  /*void print() {
     std::cout << "RAM MEMORY:" << std::endl;
     RAM_MEM.print();
-  }
+    }*/
 
+  /*
+    Prints Current Process and all processes stored on the ready_queue
+  */
   void PrintCurrent() { //S r command
     if(ready_queue.front().first > 0) {
       std::cout << "CPU (Current Process): P" << ready_queue.front().first << std::endl;
@@ -131,6 +141,9 @@ class OperatingSystem {
     //print();
   }
 
+  /*
+    Prints Processes waiting/reading for each hard disk on the OS (dqueue)
+  */
   void PrintDisks() { //S i command
     std::vector<DiskQueue>::iterator it;
     for(it = disk_queue.begin(); it != disk_queue.end(); it++) {
@@ -139,6 +152,9 @@ class OperatingSystem {
     }
   }
 
+  /*
+    Prints all Processes stored on RAM memory
+  */
   void PrintMEM() { //S m command
     std::cout << std::endl;
     RAM_MEM.PrintMemory();

@@ -91,10 +91,17 @@ class Cylinders {
     }
   }
 
+  /*
+    Returns true if there are no cylinders to read
+    otherwise, false
+  */
   bool isEmpty() {
     return cylinders.empty();
   }
 
+  /*
+    Print statement
+  */
   void print() {
     std::list<int>::iterator it;
     for(it = cylinders.begin(); it != cylinders.end(); it++) {

@@ -23,6 +23,7 @@
 //RAM - stores PCB's in memory
 class RAM {
   public:
+  //Constructor
   RAM(unsigned long int _size):
     process_count(0),
     size(_size) {
@@ -30,19 +31,27 @@ class RAM {
     memory.push_back(first_block);
   }
 
+  /*
+    Returns current count of created processes
+  */
   int GetCount() {
     return CurrentProcessCount();
   }
 
-  void print() {
+  //Debugging print statement
+  /*void print() {
     std::list<PCB*>::iterator it = memory.begin();
     while(it != memory.end()) {
       std::cout << (*it)->PID << " " << (*it)->priority_level << " " << (*it)->memory_occupied.first << " " << (*it)->memory_occupied.second << std::endl;
+
       it++;
     }
     std::cout << std::endl;
-  }
+    }*/
 
+  /*
+    Print statement of all processes stored on RAM memory
+  */
   void PrintMemory() {
     std::list<PCB*>::iterator it = memory.begin();
     while(it != memory.end()) {
@@ -56,6 +65,9 @@ class RAM {
     }
   }
 
+  /*
+    Returns the priority level of inputted PID
+  */
   int FindPriority(int PID) {
     std::list<PCB*>::iterator it = memory.begin();
     while(it != memory.end()) {
@@ -67,6 +79,10 @@ class RAM {
     return -1;
   }
 
+  /*
+    Checks if a potential process can be created/ there is space to
+    Creates a new process in RAM memory if there is space available to.
+  */
   void CreateNewProcess(int priority, unsigned long int size) {
     std::list<PCB*>::iterator it = memory.begin();
     while(it != memory.end()) {
@@ -99,6 +115,10 @@ class RAM {
     }
   }
 
+  /*
+    Removes the process from RAM memoryc if it exists
+    Calls to merge any empty spaces of memory/empty PCBs (that have PID = 0 and priority_level = -1)
+  */
   void TerminatePCB(int PID) {
     std::list<PCB*>::iterator it = memory.begin();
     while(it != memory.end()) {
@@ -117,10 +137,15 @@ class RAM {
   unsigned long int size;
   int process_count;
 
+  //Returns current process count
   int CurrentProcessCount() {
     return process_count;
   }
 
+  /*
+    Helper function to MergeEmptyPCB
+    To copy all PCBs over to the left, such that the last one on the list is a duplicate to be removed
+  */
   void Reduce(std::list<PCB*>::iterator it) {
     while(it != memory.end()) {
       std::list<PCB*>::iterator next = it++;
@@ -131,6 +156,9 @@ class RAM {
     }
   }
 
+  /*
+    Merges adjacent PCBs marked as "free memory" (PID = 0 and priority_level = -1)
+   */
   void MergeEmptyPCB() {
     std::list<PCB*>::iterator it = memory.begin();
     std::list<PCB*>::iterator next = it++;
